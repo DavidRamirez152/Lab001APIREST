@@ -46,3 +46,7 @@ app.Run(async context => {
 app.MapControllers();
 
 app.Run();
+
+namespace Microsoft.AspNetCore.Http {
+    public delegate Task RequestDelegate(HttpContext context);
+}
