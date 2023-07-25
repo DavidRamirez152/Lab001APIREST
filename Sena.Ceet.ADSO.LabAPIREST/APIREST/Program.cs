@@ -43,8 +43,7 @@ app.UseAuthorization();
 //    await context.Response.WriteAsync("Hello from the middleware component.");
 //});
 
-app.Use(async (context, next) =>
-{
+app.Use(async (context, next) => {
     Console.WriteLine($"Logic before executing the next delegate in the Use method");
     await next.Invoke();
     Console.WriteLine($"Logic before executing the next delegate in the Use method");
@@ -56,17 +55,14 @@ app.Map("/usingmapbranch", builder => {
         Console.WriteLine("Map branch logic in the Use method after the next delegate");
     });
 
-    builder.Run(async context =>
-    {
+    builder.Run(async context => {
         Console.WriteLine($"Map branch response to the client in the Run method");
         await context.Response.WriteAsync("Hello from the map branch.");
     });
 });
 
-app.MapWhen(context => context.Request.Query.ContainsKey("testquerystring"), builder =>
-{
-    builder.Run(async context =>
-    {
+app.MapWhen(context => context.Request.Query.ContainsKey("testquerystring"), builder => {
+    builder.Run(async context => {
         await context.Response.WriteAsync("Hello from the MapWhen branch");
     });
 });
